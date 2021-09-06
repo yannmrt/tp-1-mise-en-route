@@ -21,9 +21,11 @@
 
 <form method="POST" action="">
     <input type="text" name="username" placeholder="Nom d'utilisateur" />
-    <input type="password" name="password" placeholder="Mot de passe" />
-    
-    <input type="submit" value="Connexion" />
+    <input type="password" name="securityPhrase" placeholder="Phrase de sécurité" />
+
+    <input type="password" name="newpassword" placeholder="Nouveau mot de passe" />
+
+    <input type="submit" value="Changer mot de passe" />
 </form>
 
 </body>
