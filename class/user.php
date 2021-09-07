@@ -119,7 +119,21 @@
                 // On va vérifie que l'user et la phrase de sécurité correspondent 
                 $req_user_security = $this->_db->prepare("SELECT * FROM user WHERE username = ? AND securityPhrase = ?");
                 $req_user_security->execute(array($this->_username, $this->_securityPhrase));
+                $verifSecurity = $req_user_security->rowCount();
 
+                if($verifSecurity == 1) {
+                    // On modifie le mot de passe
+                    $edit_password = $this->_db->prepare("UPDATE  user SET password = :password WHERE username = :username");
+                    $edit_password->execute(array(
+                        "password" => $this->_password,
+                        "username" => $this->_username
+                    ));
+
+                    // MOT DE PASSE MODIFIER                                          A FINIR
+                } else {
+                    $error = "Informations éronnées";
+                    return $error;
+                }
             }
         }
     }
