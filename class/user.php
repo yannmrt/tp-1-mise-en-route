@@ -8,6 +8,8 @@
          * password : mot de passe
          * securite : phrase de sécurité
          * 
+         * db : variable pdo
+         * 
          */
         private $_id;
         private $_username;
