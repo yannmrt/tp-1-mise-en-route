@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /**
  * 
  * INFORMATIONS DE LA BASE DE DONNEES
@@ -11,9 +13,10 @@
 */
 
 $_DB = array(
-    "hostname" => "",
-    "username" => "",
-    "password" => "" 
+    "hostname" => "localhost",
+    "username" => "root",
+    "password" => "",
+    "dbname" => "tp1" 
 );
 
 
@@ -26,7 +29,7 @@ $_DB = array(
  *  
 */
 try {
-    $_PDO = new pdo("mysql:host="); 
+    $_PDO = new pdo("mysql:host=".$_DB['hostname'].";dbname=".$_DB['dbname'].";charset=utf8", $_DB['username'], $_DB['password']);
 } catch(Exception $e) {
     echo "Erreur de connexion:" .$e;
 }

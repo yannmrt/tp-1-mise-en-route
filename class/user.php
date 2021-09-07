@@ -9,10 +9,12 @@
          * securite : phrase de sécurité
          * 
          */
-        protected $id;
-        protected $username;
-        protected $password;
-        protected $securityPhrase;
+        private $_id;
+        private $_username;
+        private $_password;
+        private $_securityPhrase;
+
+        private $_db;
 
         //Constructeur du User depuis la BDD (utiliser PDO)
         public function __construct($_PDO) {
@@ -50,7 +52,7 @@
                                     $insert_user = $this->_db->prepare("INSERT INTO user SET username = :username, email = :email, securityPhrase = :securityPhrase, password = :password, admin = :admin");
                                     $insert_user->execute(array(
                                         "username" => $this->_username,
-                                        "email" = $this->_email,
+                                        "email" => $this->_email,
                                         "securityPhrase" => $this->_securityPhrase,
                                         "password" => $this->_password,
                                         "admin" => "0"
@@ -95,7 +97,22 @@
                     "password" => $this->_password
                 ));
 
-                // REDIRECTION                                                     A FINIR
+                $userExist = $reqUser->rowCount();
+                if($userExist > 0) {
+                    $_USER = $reqUser->fetch();
+                    
+                    $_SESSION["id"] = $_USER["id"];
+                    $_SESSION["username"] = $_USER["username"];
+                    $_SESSION["email"] = $_USER["email"];
+                    $_SESSION["securityPhrase"] = $_USER["securityPhrase"];
+                    $_SESSION["admin"] = $_USER["admin"];
+
+                    echo "bjr" . $_SESSION["username"];
+
+                } else {
+                    $error = "Mauvais mot de passe";
+                    return $error;
+                }
 
             }
 
@@ -128,6 +145,8 @@
                         "password" => $this->_password,
                         "username" => $this->_username
                     ));
+
+                    echo "mot de passe changer";
 
                     // MOT DE PASSE MODIFIER                                          A FINIR
                 } else {

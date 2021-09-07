@@ -6,8 +6,18 @@
  * 
 */
 
-//require "class/user.class.php";
-//require "inc/db.php";
+require "class/user.php";
+require "inc/db.php";
+
+/**
+ * 
+ *  On prépare la fonction si le POST du formulaire est envoyé 
+ * 
+*/
+if(isset($_POST["username"])) {
+    $_USER = new User($_PDO);
+    $_USER->pwreset($_POST["username"], $_POST["securityPhrase"], $_POST["newpassword"]);
+}
 
 ?>
 
