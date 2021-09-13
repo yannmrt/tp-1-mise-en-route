@@ -61,7 +61,18 @@ class Admin {
     }
 
     //On modifie la longitude / latitude GPS identifié grace à son ID
-    public function ModifTrame($idGPS, $longitude, $latitude) {
+    public function ModifTrame($id, $longitude, $latitude) {
+        $this->_id = htmlspecialchars($id);
+        $this->_longitude = htmlspecialchars($longitude);
+        $this->_latitude = htmlspecialchars($latitude);
 
+        if(!empty($this->_id) AND !empty($this->_longitude) AND !empty($this->_latitude)) {
+            $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude WHERE id = ?");
+            $editTrame->execute(array(
+                "longitude" => $this->_longitude,
+                "latitude" => $this->_latitude,
+                "id" => $this->_id
+            ));
+        }
     }
 } 
