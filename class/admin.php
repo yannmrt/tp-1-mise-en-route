@@ -14,7 +14,7 @@ class Admin {
     private $_admin; 
     private $_longitude;
     private $_latitude;
-    private $_idGPS;
+    private $_id;
     private $_name;
 
     private $_db;
@@ -51,8 +51,13 @@ class Admin {
     }
 
     //On supprime un points GPS grace à son ID (faire système pour trouver / lister toutes les trames ?)
-    public function DeleteTrame($idGPS) {
+    public function DeleteTrame($id) {
+        $this->_id = $id;
 
+        if($this->_id > 0) {
+            $delTrame = $this->_db->prepare("DELETE FROM gps WHERE id = ?");
+            $delTrame->execute(array($this->_id));
+        }
     }
 
     //On modifie la longitude / latitude GPS identifié grace à son ID
