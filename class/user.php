@@ -109,7 +109,7 @@
                     $_SESSION["securityPhrase"] = $_USER["securityPhrase"];
                     $_SESSION["admin"] = $_USER["admin"];
 
-                    echo "bjr" . $_SESSION["username"];
+                    header("Location: index.php");
 
                 } else {
                     $error = "Mauvais mot de passe";
@@ -125,6 +125,7 @@
             $_SESSION = array();
             session_destroy();
 
+            header("Location: login.php");
         }
 
         //Changement de MPD en BDD avec Sécurité + Nom

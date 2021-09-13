@@ -15,6 +15,7 @@ require "inc/db.php";
  * 
 */
 if(isset($_POST["username"])) {
+
     $_USER = new User($_PDO);
     $_USER->register($_POST["username"], $_POST["email"], $_POST["securityPhrase"], $_POST["password"]);
 }
@@ -50,13 +51,13 @@ if(isset($_POST["username"])) {
                     <div class="form-group">
                         <label for="username">Nom d'utilisateur</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="username"name="username" placeholder="Votre nom d'utilisateur">
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Votre nom d'utilisateur">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="email">Adresse email</label>
                         <div class="col-sm-4">
-                            <input type="email" class="form-control" id="email"name="email" placeholder="Votre adresse email">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Votre adresse email">
                         </div>
                     </div>
                     <div class="form-group">
