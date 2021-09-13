@@ -57,22 +57,56 @@ class Admin {
         if($this->_id > 0) {
             $delTrame = $this->_db->prepare("DELETE FROM gps WHERE id = ?");
             $delTrame->execute(array($this->_id));
+
+            header("Location: trameList.php");
         }
     }
 
     //On modifie la longitude / latitude GPS identifié grace à son ID
-    public function editTrame($id, $longitude, $latitude) {
+    public function editTrame($id, $longitude, $latitude, $name) {
         $this->_id = htmlspecialchars($id);
         $this->_longitude = htmlspecialchars($longitude);
         $this->_latitude = htmlspecialchars($latitude);
+        $this->_name = htmlspecialchars($name);
 
-        if(!empty($this->_id) AND !empty($this->_longitude) AND !empty($this->_latitude)) {
-            $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude WHERE id = ?");
+        if(!empty($this->_id) AND !empty($this->_longitude) AND !empty($this->_latitude) AND !empty($this->_name)) {
+            $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude, name = :name WHERE id = :id");
             $editTrame->execute(array(
                 "longitude" => $this->_longitude,
                 "latitude" => $this->_latitude,
+                "name" => $this->_name,
                 "id" => $this->_id
             ));
         }
+    }
+
+    // On affiche tous les valeurs de trames de la base de données 
+    public function showList() {
+        $req_trameList = $this->_db->prepare("SELECT * FROM gps");
+        $req_trameList->execute();
+        $count = $req_trameList->rowCount();
+
+        while($_TRAME = $req_trameList->fetch()) {
+            echo '
+            
+            <tr>
+                <th scope="row">'.$_TRAME["id"].'</th>
+                <td>'.$_TRAME["name"].'</td>
+                <td>'.$_TRAME["longitude"].'</td>
+                <td>'.$_TRAME["latitude"].'</td>
+                <td><a href="editTrame.php?id='.$_TRAME["id"].'"><label class="btn btn-primary btn-sm">Modifier</label></a><a href="editTrame.php?id='.$_TRAME["id"].'&method=delete"><label class="btn btn-danger btn-sm">Supprimer</label></a></td>
+            </tr>
+            
+            ';
+
+        }
+    }
+
+    // Cette fonction permet de récupèrer toutes les informations de la trame en fonction de l'id
+    public function getTrameInfo($id) {
+        $get_info = $this->_db->prepare("SELECT * FROM gps WHERE id = ?");
+        $get_info->execute(array($id)); 
+        
+        return $_infoTram = $get_info->fetch();
     }
 } 
