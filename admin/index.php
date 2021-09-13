@@ -6,6 +6,7 @@
  * 
 */
 require "../class/user.php";
+require "../class/admin.php";
 require "../inc/db.php";
 
 if($_SESSION["admin"] == 0) {

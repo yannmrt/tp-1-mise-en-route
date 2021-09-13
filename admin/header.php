@@ -8,10 +8,9 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trames</a>
                              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="login.php">Ajouter une trame</a></li>
-                                    <li><a class="dropdown-item" href="register.php">Modifier une trame</a></li>
+                                    <li><a class="dropdown-item" href="addTrame.php">Ajouter une trame</a></li>
                                     <li><hr class="dropdown-divider" /></li>
-                                    <li><a class="dropdown-item" href="pwreset.php">Supprimer une trame</a></li>
+                                    <li><a class="dropdown-item" href="trameList.php">Liste des trames</a></li>
                              </ul>
                         </li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="../index.php">Retour page utilisateur</a></li>

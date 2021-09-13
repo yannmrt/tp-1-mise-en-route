@@ -25,7 +25,7 @@ class Admin {
     }
 
     //On ajoute des coordonnée GPS à la base de donnée grace à la longitude et la latitude renseigné
-    public function AjoutTrame($longitude, $latitude, $name) {
+    public function addTrame($longitude, $latitude, $name) {
         $this->_longitude = htmlspecialchars($longitude);
         $this->_latitude = htmlspecialchars($latitude);
         $this->_name = htmlspecialchars($name);
@@ -51,7 +51,7 @@ class Admin {
     }
 
     //On supprime un points GPS grace à son ID (faire système pour trouver / lister toutes les trames ?)
-    public function DeleteTrame($id) {
+    public function delTrame($id) {
         $this->_id = $id;
 
         if($this->_id > 0) {
@@ -61,7 +61,7 @@ class Admin {
     }
 
     //On modifie la longitude / latitude GPS identifié grace à son ID
-    public function ModifTrame($id, $longitude, $latitude) {
+    public function editTrame($id, $longitude, $latitude) {
         $this->_id = htmlspecialchars($id);
         $this->_longitude = htmlspecialchars($longitude);
         $this->_latitude = htmlspecialchars($latitude);
