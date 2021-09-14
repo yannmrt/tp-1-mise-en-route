@@ -67,15 +67,15 @@ if(isset($_GET["method"])) {
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="email">Longitude</label>
+                        <label for="number">Longitude</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="longitude" name="longitude" value="<?php echo $_infoTram["longitude"]; ?>">
+                            <input type="number" class="form-control" id="longitude" name="longitude" value="<?php echo $_infoTram["longitude"]; ?>">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="email">Latitude</label>
+                        <label for="number">Latitude</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="latitude" name="latitude" value="<?php echo $_infoTram["latitude"]; ?>">
+                            <input type="number" class="form-control" id="latitude" name="latitude" value="<?php echo $_infoTram["latitude"]; ?>">
                         </div>
                     </div>
                     <div class="form-group col-md-4">

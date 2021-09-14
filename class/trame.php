@@ -45,15 +45,25 @@ class Trame {
             $name_exist_count = $req_name_exist->rowCount();
 
             if($name_exist_count == 0) {
-                $add_trame =  $this->_db->prepare("INSERT INTO gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat");
-                $add_trame->execute(array(
-                    "longitude" => $this->_longitude,
-                    "latitude" => $this->_latitude,
-                    "name" => $this->_name,
-                    "idBoat" => $this->_idBoat
-                ));
-                $error = '<div class="alert alert-success" role="alert">La trame a bien été ajouté à la base de donnée</div>';
-                return $error;
+                if(filter_var($this->_longitude, FILTER_VALIDATE_INT)) {
+                    if(filter_var($this->_latitude, FILTER_VALIDATE_INT)) {
+                        $add_trame =  $this->_db->prepare("INSERT INTO gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat");
+                        $add_trame->execute(array(
+                            "longitude" => $this->_longitude,
+                            "latitude" => $this->_latitude,
+                            "name" => $this->_name,
+                            "idBoat" => $this->_idBoat
+                        ));
+                        $error = '<div class="alert alert-success" role="alert">La trame a bien été ajouté à la base de donnée</div>';
+                        return $error;
+                    } else {
+                        $error = '<div class="alert alert-danger" role="alert">Veuillez entrer uniquement des chiffres</div>';
+                        return $error;
+                    }
+                } else {
+                    $error = '<div class="alert alert-danger" role="alert">Veuillez entrer uniquement des chiffres</div>';
+                    return $error;
+                }
             } else {
                 $error = '<div class="alert alert-danger" role="alert">Le nom est déjà utilisé</div>';
                 return $error;
@@ -98,17 +108,27 @@ class Trame {
         $this->_idBoat = htmlspecialchars($idBoat);
 
         if(!empty($this->_id) AND !empty($this->_longitude) AND !empty($this->_latitude) AND !empty($this->_name)) {
-            $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat WHERE id = :id");
-            $editTrame->execute(array(
-                "longitude" => $this->_longitude,
-                "latitude" => $this->_latitude,
-                "name" => $this->_name,
-                "idBoat" => $this->_idBoat,
-                "id" => $this->_id
-            ));
+            if(filter_var($this->_longitude, FILTER_VALIDATE_INT)) {
+                if(filter_var($this->_latitude, FILTER_VALIDATE_INT)) {
+                    $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat WHERE id = :id");
+                    $editTrame->execute(array(
+                        "longitude" => $this->_longitude,
+                        "latitude" => $this->_latitude,
+                        "name" => $this->_name,
+                        "idBoat" => $this->_idBoat,
+                        "id" => $this->_id
+                    ));
 
-            $error = '<div class="alert alert-success" role="alert">La trame a bien été editée</div>';
-            return $error;
+                    $error = '<div class="alert alert-success" role="alert">La trame a bien été editée</div>';
+                    return $error;
+                } else {
+                    $error = '<div class="alert alert-danger" role="alert">Veuillez entrer uniquement des chiffres</div>';
+                    return $error;
+                }
+            } else {
+                $error = '<div class="alert alert-danger" role="alert">Veuillez entrer uniquement des chiffres</div>';
+                return $error;
+            }
         }
     }
 
