@@ -130,6 +130,7 @@ class Trame {
                 <td>'.$_TRAME["name"].'</td>
                 <td>'.$_TRAME["longitude"].'</td>
                 <td>'.$_TRAME["latitude"].'</td>
+                <td>'.$_TRAME["idBoat"].'</td>
                 <td><a href="editTrame.php?id='.$_TRAME["id"].'"><label class="btn btn-primary btn-sm">Modifier</label></a><a href="editTrame.php?id='.$_TRAME["id"].'&method=delete"><label class="btn btn-danger btn-sm">Supprimer</label></a></td>
             </tr>
             
@@ -150,6 +151,28 @@ class Trame {
         $get_info->execute(array($id)); 
         
         return $_infoTram = $get_info->fetch();
+    }
+
+    /**
+     * 
+     * On récupère la liste des bateaux sous forme de menu déroulant (page: addTram.php)
+     * 
+     */
+    public function getBoatList() {
+        $getBoat = $this->_db->prepare("SELECT * FROM boat");
+        $getBoat->execute();
+        $boatExist = $getBoat->rowCount();
+
+        if($boatExist > 0) {
+            while($_BOAT = $getBoat->fetch()) {
+                echo '
+
+                    <option value="'.$_BOAT["id"].'">'.$_BOAT["id"].' - '.$_BOAT["name"].'</option>
+
+                ';
+
+            }
+        }
     }
 
 }

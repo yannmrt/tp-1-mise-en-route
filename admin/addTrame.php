@@ -13,10 +13,12 @@ if($_SESSION["admin"] == 0) {
     header("Location: ../index.php");
 }
 
+$_TRAME = new Trame($_PDO);
+
 if(isset($_POST["name"])) {
-    $_TRAME = new Trame($_PDO);
     $error = $_TRAME->addTrame($_POST["longitude"], $_POST["latitude"], $_POST["name"], $_POST["idBoat"]);
 }
+
 
 ?>
 
@@ -66,11 +68,11 @@ if(isset($_POST["name"])) {
                             <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Latitude">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Id du bateau</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="idBoat" name="idBoat" placeholder="id du bateau">
-                        </div>
+                    <div class="form-group col-md-4">
+                    <label for="admin">Bateau à lier</label>
+                    <select id="idBoat" name="idBoat" class="form-control">
+                        <?php $_TRAME->getBoatList();?>
+                    </select>
                     </div>
                     <br/>
                     <button type="submit" class="btn btn-primary">Ajouter</button>

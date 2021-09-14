@@ -47,6 +47,7 @@ $_TRAME = new Trame($_PDO);
                 <th scope="col">Nom</th>
                 <th scope="col">Longitude</th>
                 <th scope="col">Latitude</th>
+                <th scope="col">Bateau lié</th>
                 <th scope="col"></th>
                 </tr>
             </thead>
