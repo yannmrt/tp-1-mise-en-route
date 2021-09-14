@@ -2,6 +2,16 @@
 
 class Trame {
 
+    /**
+    * 
+    * longitude : longitude de la trame
+    * latitude : latitude de la trame
+    * id : id de la trame
+    * name : nom de la trame
+    *
+    * db : variable pdo
+    * 
+    */
     private $_longitude;
     private $_latitude;
     private $_id;
@@ -9,11 +19,20 @@ class Trame {
 
     private $_db;
 
+    // Constructeur de la classe User avec la base de donnée ($_PDO est dans /inc/db.php)
     public function __construct($_PDO) {
         $this->_db = $_PDO;
     }
 
-    //On ajoute des coordonnée GPS à la base de donnée grace à la longitude et la latitude renseigné
+    /**
+     * 
+     * Ajouter une trame à la base de donnée (page: admin/addTrame.php)
+     * 
+     * longitude : longitude de la trame
+     * latitude : latitude de la trame 
+     * name : nom de la trame
+     * 
+     */
     public function addTrame($longitude, $latitude, $name) {
         $this->_longitude = htmlspecialchars($longitude);
         $this->_latitude = htmlspecialchars($latitude);
@@ -41,7 +60,13 @@ class Trame {
 
     }
 
-    //On supprime un points GPS grace à son ID (faire système pour trouver / lister toutes les trames ?)
+    /**
+     * 
+     * Supprimer une trame de la base de donnée en fonction de l'id (page: editTrame.php)
+     * 
+     * $id : id de la trame
+     * 
+     */
     public function delTrame($id) {
         $this->_id = $id;
 
@@ -53,7 +78,16 @@ class Trame {
         }
     }
 
-    //On modifie la longitude / latitude GPS identifié grace à son ID
+    /** 
+     * 
+     * Modifier une trame en fonction de l'id (page: editTrame.php)
+     * 
+     * $id : id de la trame 
+     * $longitude : longitude de la trame
+     * $latitude : latitude de la trame
+     * $name : nom de la trame
+     * 
+     */
     public function editTrame($id, $longitude, $latitude, $name) {
         $this->_id = htmlspecialchars($id);
         $this->_longitude = htmlspecialchars($longitude);
@@ -74,7 +108,11 @@ class Trame {
         }
     }
 
-    // On affiche tous les valeurs de trames de la base de données 
+    /**
+     * 
+     * Afficher toutes les trames de la bdd dans un tableau (page: trameList.php)
+     * 
+     */
     public function showTrameList() {
         $req_trameList = $this->_db->prepare("SELECT * FROM gps");
         $req_trameList->execute();
@@ -96,7 +134,13 @@ class Trame {
         }
     }
 
-    // Cette fonction permet de récupèrer toutes les informations de la trame en fonction de l'id
+    /**
+     * 
+     * On récupère les informations d'une trame en fonction de l'id (page: editTrame.php)
+     * 
+     * $id : id de la trame
+     * 
+     */
     public function getTrameInfo($id) {
         $get_info = $this->_db->prepare("SELECT * FROM gps WHERE id = ?");
         $get_info->execute(array($id)); 

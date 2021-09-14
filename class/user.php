@@ -18,11 +18,20 @@
 
         private $_db;
 
-        //Constructeur du User depuis la BDD (utiliser PDO)
+        // Constructeur de la classe User avec la base de donnée ($_PDO est dans /inc/db.php)
         public function __construct($_PDO) {
             $this->_db = $_PDO;
         }
 
+        /**
+         * Création du compte utilisateur (page: register.php)
+         * 
+         * $username : nom d'utilisateur
+         * $email : email de l'utilisateur
+         * $securityPhrase : phrase de récupération du mot de passe
+         * $password : mot de passe de l'utilisateur
+         * 
+         */
         public function register($username, $email, $securityPhrase, $password) {
 
             $this->_username = htmlspecialchars($username);
@@ -38,19 +47,16 @@
 
                         $securityPhrase_len = strlen($this->_securityPhrase);
                         if($securityPhrase_len <= 20) {
-                            // On vérifie que l'email n'est pas déjà en base de données
                             $req_email = $this->_db->prepare("SELECT email FROM user WHERE email = ?");
                             $req_email->execute(array($this->_email));
                             $count_email = $req_email->rowCount();
 
                             if($count_email == 0) {
 
-                                // On vérifie que le pseudo n'est pas déjà en base de données
                                 $req_username = $this->_db->prepare("SELECT username FROM user WHERE username = ?");
                                 $req_username->execute(array($this->_username));
                                 $count_username = $req_username->rowCount();
                                 if($count_username == 0) {
-                                    // On va pouvoir créer l'utilisateur en bdd
                                     $insert_user = $this->_db->prepare("INSERT INTO user SET username = :username, email = :email, securityPhrase = :securityPhrase, password = :password, admin = :admin");
                                     $insert_user->execute(array(
                                         "username" => $this->_username,
@@ -60,8 +66,8 @@
                                         "admin" => "0"
                                     ));
 
-                                    // Utilisateur créer
-
+                                    $error = '<div class="alert alert-success" role="alert">Votre compte a été créer avec succès./div>';
+                                    return $error;
                                 } else {
                                     $error = '<div class="alert alert-danger" role="alert">Le nom d\'utilisateur est déjà utilisé</div>';
                                     return $error;
@@ -86,7 +92,14 @@
             }
         }
 
-        //On verifie si le Nom et le Mot de Passe soit similaire à ceux present en base, si oui, on cré une SESSION
+        /**
+         * 
+         * Connexion à un compte utilisateur et ouverture de la session (page: login.php)
+         * 
+         * $username : nom d'utilisateur 
+         * $password : mot de passe de l'utilisateur
+         * 
+         */
         public function login($username, $password) {
 
             $this->_username = htmlspecialchars($username);
@@ -120,7 +133,13 @@
 
         }
 
-        //On supprime la SESSION
+        /**
+         * 
+         * Déconnexion de l'utilisateur (page: logout.php)
+         * 
+         * $_SESSION = array() : On remplace la variable de session par un tableau vide avant de détruire la session
+         * 
+         */
         public function logout() {
             $_SESSION = array();
             session_destroy();
@@ -128,7 +147,15 @@
             header("Location: login.php");
         }
 
-        //Changement de MPD en BDD avec Sécurité + Nom
+        /**
+         * 
+         * Changement du mot de passe en cas de mot de passe oublié grâce à la phrase de récupération (page: pwreset.php)
+         * 
+         * $username : nom d'utilisateur
+         * $securityPhrase : phrase de récupération
+         * $password : nouveau mot de passe 
+         * 
+         */
         public function pwreset($username, $securityPhrase, $password) {
 
             $this->_username = htmlspecialchars($username);
@@ -136,13 +163,12 @@
             $this->_password = hash("sha512", $password);
 
             if(!empty($this->_username) AND !empty($this->_securityPhrase) AND !empty($this->_password)) {
-                // On va vérifie que l'user et la phrase de sécurité correspondent 
+
                 $req_user_security = $this->_db->prepare("SELECT * FROM user WHERE username = ? AND securityPhrase = ?");
                 $req_user_security->execute(array($this->_username, $this->_securityPhrase));
                 $verifSecurity = $req_user_security->rowCount();
 
                 if($verifSecurity == 1) {
-                    // On modifie le mot de passe
                     $edit_password = $this->_db->prepare("UPDATE  user SET password = :password WHERE username = :username");
                     $edit_password->execute(array(
                         "password" => $this->_password,
@@ -150,8 +176,6 @@
                     ));
 
                     $error = '<div class="alert alert-success" role="alert">Le mot de passe a bien été changer</div>';
-
-                    // MOT DE PASSE MODIFIER                                          A FINIR
                 } else {
                     $error = '<div class="alert alert-danger" role="alert">Informations éronnées</div>';
                     return $error;
@@ -159,7 +183,11 @@
             }
         }
 
-    // Afficher tous les utilisateurs dans la base de donnée dans un tableau
+    /**
+     * 
+     * On affiche le contenu de la table utilisateur dans un tableau (page: admin/userList.php)
+     * 
+     */
     public function showUserList() {
         $req_userList = $this->_db->prepare("SELECT * FROM user");
         $req_userList->execute();
@@ -188,7 +216,13 @@
         }
     }
 
-    // Cette fonction permt de récupèrer les informations de l'utilisateur en fonction de l'id
+    /**
+     * 
+     * On récupère les informations de l'utilisateur (page: admin/editUser.php)
+     * 
+     * $id : id de l'utilisateur
+     * 
+     */
     public function getUserInfo($id) {
         $get_info = $this->_db->prepare("SELECT * FROM user WHERE id = ?");
         $get_info->execute(array($id)); 
@@ -196,7 +230,17 @@
         return $_userInfo = $get_info->fetch();
     }
 
-    // Cette fonction permet d'éditer un utilisateur en fonction de l'id
+    /**
+     * 
+     * Permet de modifier les informations de l'utilisateur (page: admin/editUser.php)
+     * 
+     * $username : nom d'utilisateur 
+     * $email : adresse email 
+     * $securityPhrase : phrase de sécurité
+     * $admin : 0 = user / 1 = admin
+     * $id : id de l'utilisateur
+     * 
+     */
     public function editUser($username, $email, $securityPhrase, $admin, $id) {
 
         $this->_username = htmlspecialchars($username);
@@ -228,7 +272,13 @@
         }
     }
 
-    // Cette fonction permet de supprimer un utilisateur en fonction de l'id
+    /**
+     * 
+     * Supprimer un utilisateur de la bdd (page: admin/editUser.php)
+     * 
+     * $id : id de l'utilisateur
+     * 
+     */
     public function delUser($id) {
         $this->_id = htmlspecialchars($id);
 
