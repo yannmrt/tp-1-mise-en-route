@@ -33,10 +33,11 @@ class Trame {
      * name : nom de la trame
      * 
      */
-    public function addTrame($longitude, $latitude, $name) {
+    public function addTrame($longitude, $latitude, $name, $idBoat) {
         $this->_longitude = htmlspecialchars($longitude);
         $this->_latitude = htmlspecialchars($latitude);
         $this->_name = htmlspecialchars($name);
+        $this->_idBoat = htmlspecialchars($idBoat);
 
         if(!empty($this->_longitude) AND !empty($this->_latitude) AND !empty($this->_name)) {
             $req_name_exist = $this->_db->prepare("SELECT name FROM gps WHERE name = ?");
@@ -44,11 +45,12 @@ class Trame {
             $name_exist_count = $req_name_exist->rowCount();
 
             if($name_exist_count == 0) {
-                $add_trame =  $this->_db->prepare("INSERT INTO gps SET longitude = :longitude, latitude = :latitude, name = :name");
+                $add_trame =  $this->_db->prepare("INSERT INTO gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat");
                 $add_trame->execute(array(
                     "longitude" => $this->_longitude,
                     "latitude" => $this->_latitude,
-                    "name" => $this->_name
+                    "name" => $this->_name,
+                    "idBoat" => $this->_idBoat
                 ));
                 $error = '<div class="alert alert-success" role="alert">La trame a bien été ajouté à la base de donnée</div>';
                 return $error;
@@ -88,18 +90,20 @@ class Trame {
      * $name : nom de la trame
      * 
      */
-    public function editTrame($id, $longitude, $latitude, $name) {
+    public function editTrame($id, $longitude, $latitude, $name, $idBoat) {
         $this->_id = htmlspecialchars($id);
         $this->_longitude = htmlspecialchars($longitude);
         $this->_latitude = htmlspecialchars($latitude);
         $this->_name = htmlspecialchars($name);
+        $this->_idBoat = htmlspecialchars($idBoat);
 
         if(!empty($this->_id) AND !empty($this->_longitude) AND !empty($this->_latitude) AND !empty($this->_name)) {
-            $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude, name = :name WHERE id = :id");
+            $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat WHERE id = :id");
             $editTrame->execute(array(
                 "longitude" => $this->_longitude,
                 "latitude" => $this->_latitude,
                 "name" => $this->_name,
+                "idBoat" => $this->_idBoat,
                 "id" => $this->_id
             ));
 

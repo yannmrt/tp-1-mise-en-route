@@ -77,6 +77,12 @@ if(isset($_GET["method"])) {
                             <input type="text" class="form-control" id="latitude" name="latitude" value="<?php echo $_infoTram["latitude"]; ?>">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="email">ID du bateau</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="idBoat" name="idBoat" value="<?php echo $_infoTram["idBoat"]; ?>">
+                        </div>
+                    </div>
                     <br/>
                     <button type="submit" class="btn btn-primary">Modifier</button>
                 </div>

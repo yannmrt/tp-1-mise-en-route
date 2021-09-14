@@ -15,7 +15,7 @@ if($_SESSION["admin"] == 0) {
 
 if(isset($_POST["name"])) {
     $_TRAME = new Trame($_PDO);
-    $error = $_TRAME->addTrame($_POST["longitude"], $_POST["latitude"], $_POST["name"]);
+    $error = $_TRAME->addTrame($_POST["longitude"], $_POST["latitude"], $_POST["name"], $_POST["idBoat"]);
 }
 
 ?>
@@ -64,6 +64,12 @@ if(isset($_POST["name"])) {
                         <label for="email">Latitude</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Latitude">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Id du bateau</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="idBoat" name="idBoat" placeholder="id du bateau">
                         </div>
                     </div>
                     <br/>
