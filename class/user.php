@@ -187,5 +187,61 @@
             ';
         }
     }
+
+    // Cette fonction permt de récupèrer les informations de l'utilisateur en fonction de l'id
+    public function getUserInfo($id) {
+        $get_info = $this->_db->prepare("SELECT * FROM user WHERE id = ?");
+        $get_info->execute(array($id)); 
+        
+        return $_userInfo = $get_info->fetch();
+    }
+
+    // Cette fonction permet d'éditer un utilisateur en fonction de l'id
+    public function editUser($username, $email, $securityPhrase, $admin, $id) {
+
+        $this->_username = htmlspecialchars($username);
+        $this->_email = htmlspecialchars($email);
+        $this->_securityPhrase = htmlspecialchars($securityPhrase);
+        $this->_admin = htmlspecialchars($admin);
+        $this->_id = htmlspecialchars($id);
+
+        if(!empty($this->_username) AND !empty($this->_email) AND !empty($this->_securityPhrase) AND !empty($this->_id)) {
+            $edit_user = $this->_db->prepare("UPDATE user SET username = :username, email = :email, securityPhrase = :securityPhrase, admin = :admin WHERE id = :id");
+            $edit_user->execute(array(
+                "username" => $this->_username,
+                "email" => $this->_email,
+                "securityPhrase" => $this->_securityPhrase,
+                "admin" => $this->_admin,
+                "id" => $this->_id
+            ));
+
+            if($_SESSION["id"] == $this->_id) {
+                header("Location: ../logout.php");
+            }
+
+            $error = '<div class="alert alert-success" role="alert">Les informations ont été modifier.</div>';
+            return $error;
+
+        } else {
+            $error = '<div class="alert alert-danger" role="alert">Tous les champs doivent être complétés.</div>';
+            return $error;
+        }
+    }
+
+    // Cette fonction permet de supprimer un utilisateur en fonction de l'id
+    public function delUser($id) {
+        $this->_id = htmlspecialchars($id);
+
+        if($this->_id > 0) {
+            $delUser = $this->_db->prepare("DELETE FROM user WHERE id = ?");
+            $delUser->execute(array($this->_id));
+
+            if($_SESSION["id"] == $this->_id) {
+                header("Location: ../logout.php");
+            } else {
+                header("Location: userList.php");
+            }
+        }
+    }
 }
 
