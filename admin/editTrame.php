@@ -6,7 +6,7 @@
  * 
 */
 require "../class/user.php";
-require "../class/admin.php";
+require "../class/trame.php";
 require "../inc/db.php";
 
 if($_SESSION["admin"] == 0) {
@@ -15,15 +15,17 @@ if($_SESSION["admin"] == 0) {
 
 if(isset($_GET["id"])) {
     $_id = htmlspecialchars($_GET["id"]);
-    $_ADMIN = new Admin($_PDO);
+    $_TRAME = new Trame($_PDO);
 }
 
 if(isset($_POST["name"])) {
-    $_ADMIN->editTrame($_id, $_POST["longitude"], $_POST["latitude"], $_POST["name"]);
+    $error = $_TRAME->editTrame($_id, $_POST["longitude"], $_POST["latitude"], $_POST["name"]);
 }
 
-if($_GET["method"] == "delete") {
-    $_ADMIN->delTrame($_id);
+if(isset($_GET["method"])) {
+    if($_GET["method"] == "delete") {
+        $_TRAME->delTrame($_id);
+    }
 }
 
 ?>
@@ -51,7 +53,9 @@ if($_GET["method"] == "delete") {
                 <p class="lead">Il est nécessaire de remplir tous les champs afin de modifier cette trame.</p>
             </div>
 
-            <?php $_infoTram = $_ADMIN->getTrameInfo($_id); ?>
+            <?php if(isset($error)) { echo $error; } ?>
+
+            <?php $_infoTram = $_TRAME->getTrameInfo($_id); ?>
             <!-- Form connexion -->
             <form method="POST" action="">
                 <div align="center">

@@ -6,7 +6,7 @@
  * 
 */
 require "../class/user.php";
-require "../class/admin.php";
+require "../class/trame.php";
 require "../inc/db.php";
 
 if($_SESSION["admin"] == 0) {
@@ -14,8 +14,8 @@ if($_SESSION["admin"] == 0) {
 }
 
 if(isset($_POST["name"])) {
-    $_ADMIN = new Admin($_PDO);
-    $_ADMIN->addTrame($_POST["longitude"], $_POST["latitude"], $_POST["name"]);
+    $_TRAME = new Trame($_PDO);
+    $error = $_TRAME->addTrame($_POST["longitude"], $_POST["latitude"], $_POST["name"]);
 }
 
 ?>
@@ -42,6 +42,8 @@ if(isset($_POST["name"])) {
                 <h1>Ajouter une trame</h1>
                 <p class="lead">Il est nécessaire de remplir tous les champs afin de créer une trame.</p>
             </div>
+
+            <?php if(isset($error)) { echo $error; } ?>
 
             <!-- Form connexion -->
             <form method="POST" action="">

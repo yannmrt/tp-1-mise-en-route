@@ -6,14 +6,14 @@
  * 
 */
 require "../class/user.php";
-require "../class/trame.php";
+require "../class/admin.php";
 require "../inc/db.php";
 
 if($_SESSION["admin"] == 0) {
     header("Location: ../index.php");
 }
 
-$_TRAME = new Trame($_PDO);
+$_USER = new User($_PDO);
 
 ?>
 
@@ -25,7 +25,7 @@ $_TRAME = new Trame($_PDO);
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Liste des trames</title>
+        <title>Liste des utilsiateurs</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -36,17 +36,18 @@ $_TRAME = new Trame($_PDO);
         <!-- Page content-->
         <div class="container">
             <div class="text-center mt-5">
-                <h1>Liste des trames</h1>
-                <p class="lead">Vous pouvez éditer les trames ou les supprimer via les boutons</p>
+                <h1>Liste des utilisateurs</h1>
+                <p class="lead">Vous pouvez visualiser les utilisateurs du site web ci-dessous.</p>
             </div>
 
             <table class="table table-striped">
             <thead>
                 <tr>
                 <th scope="col">#</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Longitude</th>
-                <th scope="col">Latitude</th>
+                <th scope="col">Nom d'utilisateur</th>
+                <th scope="col">Adresse email</th>
+                <th scope="col">Phrase de sécurité</th>
+                <th scope="col">Rang</th>
                 <th scope="col"></th>
                 </tr>
             </thead>
@@ -58,7 +59,7 @@ $_TRAME = new Trame($_PDO);
                 <td>@mdo</td>
                 <td><label class="btn btn-primary btn-sm">Modifier</label><label class="btn btn-danger btn-sm">Supprimer</label></td>
                 </tr>-->
-                <?php $_TRAME->showTrameList(); ?>
+                <?php $_USER->showUserList(); ?>
             </tbody>
             </table>
 

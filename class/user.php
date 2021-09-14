@@ -153,10 +153,39 @@
 
                     // MOT DE PASSE MODIFIER                                          A FINIR
                 } else {
-                    $error = '<div class="alert alert-danger" role="alert">Informations éronnées';
+                    $error = '<div class="alert alert-danger" role="alert">Informations éronnées</div>';
                     return $error;
                 }
             }
         }
+
+    // Afficher tous les utilisateurs dans la base de donnée dans un tableau
+    public function showUserList() {
+        $req_userList = $this->_db->prepare("SELECT * FROM user");
+        $req_userList->execute();
+        $count = $req_userList->rowCount();
+
+        while($_USER = $req_userList->fetch()) {
+
+            if($_USER["admin"] == 1) {
+                $_USER["rang"] = "Admin";
+            } else {
+                $_USER["rang"] = "User";
+            }
+
+            echo '
+            
+            <tr>
+                <th scope="row">'.$_USER["id"].'</th>
+                <td>'.$_USER["username"].'</td>
+                <td>'.$_USER["email"].'</td>
+                <td>'.$_USER["securityPhrase"].'</td>
+                <td>'.$_USER["rang"].'</td>
+                <td><a href="editUser.php?id='.$_USER["id"].'"><label class="btn btn-primary btn-sm">Modifier</label></a><a href="editUser.php?id='.$_USER["id"].'&method=delete"><label class="btn btn-danger btn-sm">Supprimer</label></a></td>
+            </tr>
+            
+            ';
+        }
     }
-?>
+}
+
