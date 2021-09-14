@@ -66,7 +66,7 @@
                                         "admin" => "0"
                                     ));
 
-                                    $error = '<div class="alert alert-success" role="alert">Votre compte a été créer avec succès./div>';
+                                    $error = '<div class="alert alert-success" role="alert">Votre compte a été créer avec succès.</div>';
                                     return $error;
                                 } else {
                                     $error = '<div class="alert alert-danger" role="alert">Le nom d\'utilisateur est déjà utilisé</div>';
