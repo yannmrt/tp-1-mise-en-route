@@ -63,24 +63,24 @@
                                     // Utilisateur créer
 
                                 } else {
-                                    $error = "Le nom d'utilisateur est déjà utilisé";
+                                    $error = '<div class="alert alert-danger" role="alert">Le nom d\'utilisateur est déjà utilisé</div>';
                                     return $error;
                                 }
                             } else {
-                                $error = "L'adresse email est déjà utilisée.";
+                                $error = '<div class="alert alert-danger" role="alert">L\'adresse email est déjà utilisée.</div>';
                                 return $error;
                             }
 
                         } else {
-                            $error = "Votre phrase de sécurité est composé de plus de 20 caractères.";
+                            $error = '<div class="alert alert-danger" role="alert">Votre phrase de sécurité est composé de plus de 20 caractères.</div>';
                             return $error;
                         }
                     } else {
-                        $error = "Veuillez entrer une adresse email valide.";
+                        $error = '<div class="alert alert-danger" role="alert">Veuillez entrer une adresse email valide.</div>';
                         return $error;
                     }
                 } else {
-                    $error = "Votre nom d'utilisateur est composé de plus de 12 caractères.";
+                    $error = '<div class="alert alert-danger" role="alert">Votre nom d\'utilisateur est composé de plus de 12 caractères.</div>';
                     return $error;
                 }
             }
@@ -112,7 +112,7 @@
                     header("Location: index.php");
 
                 } else {
-                    $error = "Mauvais mot de passe";
+                    $error = '<div class="alert alert-danger" role="alert">Mauvais mot de passe ou nom d\'utilisateur</div>';
                     return $error;
                 }
 
@@ -149,11 +149,11 @@
                         "username" => $this->_username
                     ));
 
-                    echo "mot de passe changer";
+                    $error = '<div class="alert alert-success" role="alert">Le mot de passe a bien été changer</div>';
 
                     // MOT DE PASSE MODIFIER                                          A FINIR
                 } else {
-                    $error = "Informations éronnées";
+                    $error = '<div class="alert alert-danger" role="alert">Informations éronnées';
                     return $error;
                 }
             }

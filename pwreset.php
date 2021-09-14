@@ -43,6 +43,8 @@ if(isset($_POST["username"])) {
                 <p class="lead">Veuillez entrer votre nom d'utilisateur ainsi que votre phrase de récupération.</p>
             </div>
 
+            <?php if(isset($error)) { echo $error; } ?>
+
             <!-- Form connexion -->
             <form method="POST" action="">
                 <div align="center">

@@ -17,7 +17,7 @@ require "inc/db.php";
 if(isset($_POST["username"])) {
 
     $_USER = new User($_PDO);
-    $_USER->register($_POST["username"], $_POST["email"], $_POST["securityPhrase"], $_POST["password"]);
+    $error = $_USER->register($_POST["username"], $_POST["email"], $_POST["securityPhrase"], $_POST["password"]);
 }
 
 ?>
@@ -44,6 +44,9 @@ if(isset($_POST["username"])) {
                 <h1>Créer un compte</h1>
                 <p class="lead">Il est nécessaire de remplir tous les champs afin de créer votre compte utilisateur.</p>
             </div>
+
+            <?php if(isset($error)) { echo $error; } ?>
+
 
             <!-- Form connexion -->
             <form method="POST" action="">

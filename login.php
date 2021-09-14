@@ -16,7 +16,7 @@ require "inc/db.php";
 */
 if(isset($_POST["username"])) {
     $_USER = new User($_PDO);
-    $_USER->login($_POST["username"], $_POST["password"]);
+    $error = $_USER->login($_POST["username"], $_POST["password"]);
 }
 ?>
 <!DOCTYPE html>
@@ -40,6 +40,8 @@ if(isset($_POST["username"])) {
                 <h1>Connexion</h1>
                 <p class="lead">Une connexion est nécessaire pour utiliser notre site web.</p>
             </div>
+
+            <?php if(isset($error)) { echo $error; } ?>
 
             <!-- Form connexion -->
             <form method="POST" action="">
