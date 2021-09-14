@@ -58,7 +58,7 @@ $_ADMIN = new Admin($_PDO);
                 <td>@mdo</td>
                 <td><label class="btn btn-primary btn-sm">Modifier</label><label class="btn btn-danger btn-sm">Supprimer</label></td>
                 </tr>-->
-                <?php $_ADMIN->showList(); ?>
+                <?php $_ADMIN->showTrameList(); ?>
             </tbody>
             </table>
 

@@ -81,7 +81,7 @@ class Admin {
     }
 
     // On affiche tous les valeurs de trames de la base de données 
-    public function showList() {
+    public function showTrameList() {
         $req_trameList = $this->_db->prepare("SELECT * FROM gps");
         $req_trameList->execute();
         $count = $req_trameList->rowCount();
@@ -108,5 +108,27 @@ class Admin {
         $get_info->execute(array($id)); 
         
         return $_infoTram = $get_info->fetch();
+    }
+
+    // Afficher tous les utilisateurs dans la base de donnée dans un tableau
+    public function showUserList() {
+        $req_userList = $this->_db->prepare("SELECT * FROM user");
+        $req_userList->execute();
+        $count = $req_userList->rowCount();
+
+        while($_USER = $req_userList->fetch()) {
+            echo '
+            
+            <tr>
+                <th scope="row">'.$_USER["id"].'</th>
+                <td>'.$_USER["username"].'</td>
+                <td>'.$_USER["email"].'</td>
+                <td>'.$_USER["securityPhrase"].'</td>
+                <td>'.$_USER["admin"].'</td>
+                <td><a href="editTrame.php?id='.$_USER["id"].'"><label class="btn btn-primary btn-sm">Modifier</label></a><a href="editTrame.php?id='.$_USER["id"].'&method=delete"><label class="btn btn-danger btn-sm">Supprimer</label></a></td>
+            </tr>
+            
+            ';
+        }
     }
 } 
