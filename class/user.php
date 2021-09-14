@@ -293,5 +293,43 @@
             }
         }
     }
+
+    /**
+     * 
+     * On modifie le mot de passe de l'utilisateur en fonction de l'id (page: setting.php)
+     * 
+     * id : id de l'utiliasteur
+     * oldpassword : ancien mot de passe
+     * newpassword : nouveau mot de passe
+     * confirmnewpassword : confirmation du nouveau mot de passe
+     * 
+     */
+    public function editPassword($id, $oldpassword, $newpassword, $confirmnewpassword) {
+
+        $this->_id = htmlspecialchars($id);
+        $this->_oldpassword = hash("sha512", $oldpassword);
+        $this->_newpassword = hash("sh512", $newpassword);
+        $this->_confirmnewpassword = hash("sha512", $confirmnewpassword);
+
+    }
+
+    /**
+     * 
+     * On change les informations du compte utilisateur en fonction de l'id (page :setting.php)
+     * 
+     * id : id de l'utilisateur
+     * username : nom d'utilisateur
+     * email : email de l'utilisateur
+     * securityPhrase : phrase de sécurité de l'utilisateur
+     * 
+     */
+    public function editSetting($id, $username, $email, $securityPhrase) {
+
+        $this->_id = htmlspecialchars($id);
+        $this->_username = htmlspecialchars($username);
+        $this->_email = htmlspecialchars($email);
+        $this->_securityPhrase = htmlspecialchars($securityPhrase);
+
+    }
 }
 

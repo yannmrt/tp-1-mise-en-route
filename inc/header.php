@@ -10,10 +10,17 @@
                             <?php 
 
                             if(isset($_SESSION["username"])) {
-                                echo '<li class="nav-item"><a class="nav-link" href="logout.php">Déconnexion</a></li>';
                                 if($_SESSION["admin"] == 1) {
                                     echo '<li class="nav-item"><a class="nav-link" href="admin/index.php">Administration</a></li>';
                                 }
+                                echo '<li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Espace membre</a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="setting.php">Mon compte</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                        <li><a class="dropdown-item" href="logout.php">Déconnexion</a></li>
+                                    </ul>
+                                </li>';
                             } else {
                                 echo '<li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Espace membre</a>
