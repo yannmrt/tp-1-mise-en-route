@@ -19,6 +19,14 @@
                                     <li><a class="dropdown-item" href="userList.php">Liste des utilisateurs</a></li>
                              </ul>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Bateaux</a>
+                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                             <li><a class="dropdown-item" href="addBoat.php">Ajouter un bateau</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="boatList.php">Liste des bateaux</a></li>
+                             </ul>
+                        </li>
                         <li class="nav-item"><a class="nav-link" aria-current="page" href="../index.php">Retour page utilisateur</a></li>
                     </ul>
                 </div>

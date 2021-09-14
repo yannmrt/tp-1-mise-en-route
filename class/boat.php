@@ -37,7 +37,7 @@ class Boat {
             $boat_name_exist = $req_boat_exist->rowCount();
             
             if($boat_name_exist == 0) {
-                $add_boat = $this->_db->prepare("INSERT INT boat SET name = :name");
+                $add_boat = $this->_db->prepare("INSERT INTO boat SET name = ?");
                 $add_boat->execute(array($this->_name));
 
                 $error = '<div class="alert alert-success" role="alert">Le bateau a été ajouté.</div>';
@@ -99,16 +99,16 @@ class Boat {
     public function showBoatList() {
 
         $req_boatList = $this->_db->prepare("SELECT * FROM boat");
-        $req_noatList->execute();
-        $count = $req_noatList->rowCount();
+        $req_boatList->execute();
+        $count = $req_boatList->rowCount();
 
-        while($_BOAT = $req_noatList->fetch()) {
+        while($_BOAT = $req_boatList->fetch()) {
             echo '
             
             <tr>
                 <th scope="row">'.$_BOAT["id"].'</th>
                 <td>'.$_BOAT["name"].'</td>
-                <td><a href="editTrame.php?id='.$_BOAT["id"].'"><label class="btn btn-primary btn-sm">Modifier</label></a><a href="editTrame.php?id='.$_BOAT["id"].'&method=delete"><label class="btn btn-danger btn-sm">Supprimer</label></a></td>
+                <td><a href="editBoat.php?id='.$_BOAT["id"].'"><label class="btn btn-primary btn-sm">Modifier</label></a><a href="editBoat.php?id='.$_BOAT["id"].'&method=delete"><label class="btn btn-danger btn-sm">Supprimer</label></a></td>
             </tr>
             
             ';
@@ -123,8 +123,8 @@ class Boat {
      * $id : id du bateau
      * 
      */
-    public function getBoatInfo() {
-        
+    public function getBoatInfo($id) {
+
         $get_info = $this->_db->prepare("SELECT * FROM boat WHERE id = ?");
         $get_info->execute(array($id)); 
         
