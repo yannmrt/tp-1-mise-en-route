@@ -17,7 +17,8 @@ class RS232 : public QMainWindow
 public:
     RS232(QWidget *parent = Q_NULLPTR);
 
-	char nombresOctets();
+	char nombresOctets;
+	
 
 private:
     Ui::RS232Class ui;
@@ -29,6 +30,8 @@ public slots:
 	void issue(const QString &trame);
 	void openPort();
 	void receive();
+	void decode();
+	void cutTrame(const QString &trame);
 
 	// BASE DE DONNEE
 	void getTrameDb();
