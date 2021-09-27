@@ -27,4 +27,5 @@ public slots:
 	// BASE DE DONNEE
 	void getTrameDb();
 	void addTrameDb();
+	void delTrameDb();
 };

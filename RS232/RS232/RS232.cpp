@@ -35,3 +35,9 @@ void RS232::addTrameDb()
 {
 
 }
+
+// Cette fonction permet de supprimer une trame en base de donnée
+void RS232::delTrameDb()
+{
+
+}
