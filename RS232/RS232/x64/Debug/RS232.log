@@ -1,0 +1,12 @@
+﻿  uic RS232.ui
+  rcc RS232.qrc
+  moc RS232.h
+  moc database.h
+   RCC: Warning: No resources in 'C:\xampp\htdocs\tp-1-mise-en-route\RS232\RS232\RS232.qrc'.
+  database.cpp
+  RS232.cpp
+  main.cpp
+  qrc_RS232.cpp
+  moc_RS232.cpp
+  moc_database.cpp
+  RS232.vcxproj -> C:\xampp\htdocs\tp-1-mise-en-route\RS232\x64\Debug\RS232.exe
