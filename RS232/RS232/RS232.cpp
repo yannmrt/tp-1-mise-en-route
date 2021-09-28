@@ -6,25 +6,25 @@ RS232::RS232(QWidget *parent)
 {
     ui.setupUi(this);
 
-	// Connexion à la bdd
+	// Connexion Ã  la bdd
 	bddMySQL = BaseDeDonnees::getInstance("QMYSQL");
 	bddMySQL->connecter("TP1", "root", "root", "192.168.64.201");
 
-	// Connexion au port série 
+	// Connexion au port sÃ©rie 
 	port = new QSerialPort(QLatin1String(PORT));
 
 	// ouverture du port
 	port->open(QIODevice::ReadWrite);
 	qDebug("<debug> etat ouverture port : %d", port->isOpen());
 
-	// TODO : réceptionner et/ou envoyer des données
+	// TODO : rÃ©ceptionner et/ou envoyer des donnÃ©es
 
 	// fermeture du port
 	port->close();
 	qDebug("<debug> etat ouverture port : %d", port->isOpen());
 }
 
-// Cette fonction permet d'émettre une trame en port série
+// Cette fonction permet d'Ã©mettre une trame en port sÃ©rie
 void RS232::issue(const QString &trame)
 {
 	int nombresOctets = -1;
@@ -37,7 +37,7 @@ void RS232::issue(const QString &trame)
 	nombresOctets = port->write(trame.toLatin1());
 }
 
-// Cette fonction permet de recevoir des informations par le port série
+// Cette fonction permet de recevoir des informations par le port sÃ©rie
 void RS232::receive()
 {
 	QByteArray donnees;
@@ -49,22 +49,21 @@ void RS232::receive()
 	}
 
 	QString trameRecue = QString(donnees.data());
-
 }
 
-// Cette fonction permet de découper la trame gps
+// Cette fonction permet de dÃ©couper la trame gps
 void RS232::decodeTrame(const QString &trame)
 {
-	// On créer les variables nécessaires pour définir l'heure de la trame en bdd
+	// On crÃ©er les variables nÃ©cessaires pour dÃ©finir l'heure de la trame en bdd
 	QString horodatage;
 	unsigned int heure, minute;
 	double seconde;
 
-	// On créer les variables nécessesaires pour définir la latitude et longitude en bdd
+	// On crÃ©er les variables nÃ©cessesaires pour dÃ©finir la latitude et longitude en bdd
 	QString latitude;
 	QString longitude;
 
-	// Découpage de la trame horaire
+	// DÃ©coupage de la trame horaire
 	horodatage = trame.section(',', 1, 1);
 	heure = horodatage.mid(0, 2).toInt();
 	minute = horodatage.mid(2, 2).toInt();
@@ -76,11 +75,11 @@ void RS232::decodeTrame(const QString &trame)
 
 	qDebug() << "Horodatage : " << horodatage;
 
-	// On récupère la latitude dans la trame : variable -> latitude
+	// On rÃ©cupÃ¨re la latitude dans la trame : variable -> latitude
 	latitude = trame.section(',', 2, 2);
 	qDebug() << "latitude : " << latitude;
 
-	// On récupére la longitude dans la trame : variable -> longitude
+	// On rÃ©cupÃ©re la longitude dans la trame : variable -> longitude
 	longitude = trame.section(',', 4, 4);
 	qDebug() << "longitude : " << longitude;
 
@@ -96,13 +95,26 @@ void RS232::decodeTrame(const QString &trame)
 
 }
 
-// Cette fonction permet de récupèrer les trames disponibles dans la base de données
+// Cette fonction permet de rÃ©cupÃ¨rer les trames disponibles dans la base de donnÃ©es
 void RS232::getTrameDb()
 {
+	QString requete;
 
+	requete = "SELECT (latitude, longitude, heure, name, idBoat) FROM gps ";
+
+	while (query.requete()) {
+
+		QString latitude = query("latitude").toString();
+		QString longitude = query("longitude").toString();
+		QString horodatage = query("heure").toString();
+		QString name = query("name").toString();
+		QString idBoat = query("idBoat").toString();
+	}
+
+	retour = bddMySQL->executer(requete);
 }
 
-// Cette fonction permet d'ajouter une trame en base de donnée
+// Cette fonction permet d'ajouter une trame en base de donnÃ©e
 void RS232::addTrameDb(QString latitude, QString longitude, QString horodatage, QString name, QString idBoat)
 {
 	QString requete;
@@ -110,8 +122,10 @@ void RS232::addTrameDb(QString latitude, QString longitude, QString horodatage, 
 	retour = bddMySQL->executer(requete);
 }
 
-// Cette fonction permet de supprimer une trame en base de donnée
+// Cette fonction permet de supprimer une trame en base de donnÃ©e
 void RS232::delTrameDb(QString id)
 {
 	QString requete;
+	requete = "DELETE FROM gps WHERE id='id' ";
+	retour = bddMySQL->executer(requete);
 }
