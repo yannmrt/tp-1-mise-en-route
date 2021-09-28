@@ -6,6 +6,33 @@ RS232::RS232(QWidget *parent)
 {
     ui.setupUi(this);
 
+	//connection a la BDD
+	try {
+
+		//variables sql
+
+		sql::Driver* driver;
+		sql::Connection* con;
+		sql::Statement* stmt;
+		sql::ResultSet* res;
+
+		//connexion a la BDD
+		driver = get_driver_instance();
+
+		con = driver->connect("tcp://192.168.64.201", "root", "root");
+
+		//séléction de la base
+		con->setSchema("TP1");
+
+		//création des requétes
+		req = con->createStatement();
+	}
+	catch (sql::SQLException &e) {
+		//retour des erreurs
+		cout << "(code erreur MySQL:" << e.getErrorCode();
+		cout << ", EtatSQL:" << e.getSQLState() << ")" << endl;
+	}
+
 	// instanciation du port
 	QSerialPort *port = new QSerialPort(PORT);
 
@@ -42,6 +69,22 @@ void RS232::issue(const QString &trame)
 // Cette fonction permet d'ouvrir le port série
 void RS232::openPort()
 {
+	for (int i = 0; i < listePorts.size(); i++)
+	{
+		QSerialPortInfo info = listePorts.at(i);
+		
+		if(!infomanufacturer().isEmpty())
+		{
+			listePortsDisponibles << info.manufacturer() + "(" + info.portName() + ")";
+
+		}
+		else 
+		{
+			listePortsDipsonibles << info.portName();
+		}
+	}
+
+	return listePortsDipsonibles;
 
 }
 
@@ -119,13 +162,39 @@ void RS232::getTrameDb()
 }
 
 // Cette fonction permet d'ajouter une trame en base de donnée
-void RS232::addTrameDb()
+void RS232::addTrameDb(req, a, b, c, d)
 {
+	prep_req = con->prepareStatement("INSERT INTO gps(latitude, longiude, name, idBoat) VALUES (?, ?, ?, ?)");
 
+	prep_req->setInt(1, 1);
+	prep_req->setString(2, "a");
+	prep_req->execute();
+
+	prep_req->setInt(1, 2);
+	prep_req->setString(2, "b");
+	prep_req->execute();
+
+	prep_req->setInt(1, 3);
+	prep_req->setString(2, "c");
+	prep_req->execute();
+
+	prep_req->setInt(1, 4);
+	prep_req->setString(2, "d");
+	prep_req->execute();
+
+	delete prep_req;
+	delete con;
 }
 
 // Cette fonction permet de supprimer une trame en base de donnée
-void RS232::delTrameDb()
+void RS232::delTrameDb(req, a)
 {
+	prep_req = con->prepareStatement("DELETE FROM gps WHERE 'id'= a ");
 
+	prep_req->setInt(1, 1);
+	prep_req->setString(1, "a");
+	prep_req->execute();
+
+	delete prep_req;
+	delete con;
 }
