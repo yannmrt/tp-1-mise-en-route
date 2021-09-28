@@ -109,7 +109,7 @@ void RS232::cutTrame(const QString &trame)
 // Cette fonction permet de convertir la découte vers un format numérique
 void RS232::decode()
 {
-
+	l
 }
 
 // Cette fonction permet de récupèrer les trames disponibles dans la base de données
