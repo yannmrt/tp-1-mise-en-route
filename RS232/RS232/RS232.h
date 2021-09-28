@@ -7,18 +7,17 @@
 #include "database.h"
 
 #include <QSerialPort>
-
-/* tvaira.free.fr/projets/activites/activite-port-serie-qt.html */
+#include <QThread>
 
 class RS232 : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    RS232(QWidget *parent = Q_NULLPTR);
-
-	char nombresOctets;
-	
+    RS232(QWidget *parent = Q_NULLPTR);	
+	char requete;
+	char retour;
+	char donnees;
 
 private:
     Ui::RS232Class ui;
@@ -28,13 +27,11 @@ private:
 public slots:
 	// PORT SERIE
 	void issue(const QString &trame);
-	void openPort();
 	void receive();
-	void decode();
-	void cutTrame(const QString &trame);
+	void decodeTrame(const QString &trame);
 
 	// BASE DE DONNEE
 	void getTrameDb();
-	void addTrameDb();
-	void delTrameDb();
+	void addTrameDb(QString latitude, QString longitude, QString horodatage, QString name, QString idBoat);
+	void delTrameDb(QString id);
 };
