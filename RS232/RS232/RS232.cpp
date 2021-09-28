@@ -197,4 +197,5 @@ void RS232::delTrameDb(req, a)
 
 	delete prep_req;
 	delete con;
+
 }
