@@ -1,10 +1,10 @@
 #include <QtWidgets/QMainWindow>
 #include <QtSql/QtSql>
+#include <QSqlQuery>
 #include <QApplication>
 #include <QDateTime>
 
 #include "ui_RS232.h"
-#include "database.h"
 
 #include <QSerialPort>
 #include <QThread>
@@ -21,7 +21,7 @@ public:
 
 private:
     Ui::RS232Class ui;
-	BaseDeDonnees *bddMySQL;
+	QSqlQuery *db;
 	QSerialPort *port;
 
 public slots:
