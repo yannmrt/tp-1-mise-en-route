@@ -1,53 +1,5 @@
 ﻿  moc RS232.h
   RS232.cpp
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(14): error C2653: 'sql' : n'est pas un nom de classe ni d'espace de noms
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(14): error C2065: 'Driver' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(14): error C2065: 'driver' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(15): error C2653: 'sql' : n'est pas un nom de classe ni d'espace de noms
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(15): error C2065: 'Connection' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(15): error C2065: 'con' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(16): error C2653: 'sql' : n'est pas un nom de classe ni d'espace de noms
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(16): error C2065: 'Statement' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(16): error C2065: 'stmt' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(17): error C2653: 'sql' : n'est pas un nom de classe ni d'espace de noms
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(17): error C2065: 'ResultSet' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(17): error C2065: 'res' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(20): error C2065: 'driver' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(20): error C3861: 'get_driver_instance' : identificateur introuvable
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(22): error C2065: 'con' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(22): error C2065: 'driver' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(25): error C2065: 'con' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(28): error C2065: 'req' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(28): error C2065: 'con' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(30): error C2653: 'sql' : n'est pas un nom de classe ni d'espace de noms
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(30): error C2061: erreur de syntaxe : identificateur 'SQLException'
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(30): error C2310: les gestionnaires catch doivent spécifier un seul type
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(32): error C2065: 'cout' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(32): error C2065: 'e' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(33): error C2065: 'cout' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(33): error C2065: 'e' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(61): error C2562: 'RS232::issue' : fonction 'void' retournant une valeur
-  c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(55): note: voir la déclaration de 'RS232::issue'
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(66): error C2562: 'RS232::issue' : fonction 'void' retournant une valeur
-  c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(55): note: voir la déclaration de 'RS232::issue'
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(72): error C2065: 'listePorts' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(74): error C2079: 'info' utilise une class de 'QSerialPortInfo' non défini
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(74): error C2065: 'listePorts' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(76): error C3861: 'infomanufacturer' : identificateur introuvable
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(78): error C2065: 'listePortsDisponibles' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(83): error C2065: 'listePortsDipsonibles' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(87): error C2065: 'listePortsDipsonibles' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(99): error C3861: 'usleep' : identificateur introuvable
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(155): error C2065: 'l' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(156): error C2143: erreur de syntaxe : absence de ';' avant '}'
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(165): error C2065: 'req' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(165): error C2065: 'a' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(165): error C2065: 'b' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(165): error C2065: 'c' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(165): error C2065: 'd' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(165): error C2761: 'void RS232::addTrameDb(void)' : la redéclaration du membre n'est pas autorisée
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(166): error C2448: 'RS232::addTrameDb' : l'initialiseur de style fonction semble être une définition de fonction
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(190): error C2065: 'req' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(190): error C2065: 'a' : identificateur non déclaré
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(190): error C2761: 'void RS232::delTrameDb(void)' : la redéclaration du membre n'est pas autorisée
-c:\xampp\htdocs\tp-1-mise-en-route\rs232\rs232\rs232.cpp(191): error C2448: 'RS232::delTrameDb' : l'initialiseur de style fonction semble être une définition de fonction
+  main.cpp
+  moc_RS232.cpp
+  RS232.vcxproj -> C:\Users\Martin\Desktop\tp-1-mise-en-route\RS232\x64\Debug\RS232.exe

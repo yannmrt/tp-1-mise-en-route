@@ -1,5 +1,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtSql/QtSql>
+#include <QSqlQuery>
 #include <QApplication>
 #include <QDateTime>
 

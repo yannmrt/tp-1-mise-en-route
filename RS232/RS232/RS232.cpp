@@ -8,7 +8,7 @@ RS232::RS232(QWidget *parent)
 
 	// Connexion à la bdd
 	bddMySQL = BaseDeDonnees::getInstance("QMYSQL");
-	bddMySQL->connecter("TP1", "root", "root", "192.168.64.201");
+	bddMySQL->connecter("TP1", "superuser", "superuser", "192.168.64.201");
 
 	// Connexion au port série 
 	port = new QSerialPort(QLatin1String(PORT));
@@ -102,14 +102,14 @@ void RS232::getTrameDb()
 
 	requete = "SELECT (latitude, longitude, heure, name, idBoat) FROM gps ";
 
-	while (query.requete()) {
+	/*while (query.requete()) {
 
 		QString latitude = query("latitude").toString();
 		QString longitude = query("longitude").toString();
 		QString horodatage = query("heure").toString();
 		QString name = query("name").toString();
 		QString idBoat = query("idBoat").toString();
-	}
+	}*/
 
 	retour = bddMySQL->executer(requete);
 }
