@@ -45,7 +45,7 @@ void RS232::receive()
 	while (port->bytesAvailable())
 	{
 		donnees += port->readAll();
-		usleep(100000); // cf. timeout
+		QThread::usleep(100000); // cf. timeout
 	}
 
 	QString trameRecue = QString(donnees.data());
