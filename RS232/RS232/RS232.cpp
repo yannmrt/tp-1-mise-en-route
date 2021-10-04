@@ -29,10 +29,10 @@ void RS232::issue(const QString &trame)
 {
 	int nombresOctets = -1;
 
-	/*if (port == NULL || !port->isOpen())
+	if (port == NULL || !port->isOpen())
 	{
 		return -1;
-	}*/
+	}
 
 	nombresOctets = port->write(trame.toLatin1());
 }
@@ -40,15 +40,19 @@ void RS232::issue(const QString &trame)
 // Cette fonction permet de recevoir des informations par le port série
 void RS232::receive()
 {
+
 	QByteArray donnees;
 
 	while (port->bytesAvailable())
 	{
+
 		donnees += port->readAll();
 		QThread::usleep(100000); // cf. timeout
+
 	}
 
 	QString trameRecue = QString(donnees.data());
+
 }
 
 // Cette fonction permet de découper la trame gps
@@ -86,10 +90,10 @@ void RS232::decodeTrame(const QString &trame)
 	QString name = "nom";
 	QString idBoat = 1;
 
-	/*
+	
 	QString requete;
 	requete = "INSERT INTO gps (latitude, longitude, heure, name, idBoat) VALUES ('" + latitude + "', '" + longitude + "', '" + heure + "', '" + name + "', '" + idBoat + "')";
-	retour = bddMySQL->executer(requete);*/
+	retour = bddMySQL->executer(requete);
 
 	RS232::addTrameDb(latitude, longitude, horodatage, name, idBoat);
 
@@ -102,16 +106,21 @@ void RS232::getTrameDb()
 
 	requete = "SELECT (latitude, longitude, heure, name, idBoat) FROM gps ";
 
-	/*while (query.requete()) {
+	while (query.requete()) {
 
 		QString latitude = query("latitude").toString();
-		QString longitude = query("longitude").toString();
-		QString horodatage = query("heure").toString();
-		QString name = query("name").toString();
-		QString idBoat = query("idBoat").toString();
-	}*/
 
+		QString longitude = query("longitude").toString();
+
+		QString horodatage = query("heure").toString();
+
+		QString name = query("name").toString();
+
+		QString idBoat = query("idBoat").toString();
+	}
 	retour = bddMySQL->executer(requete);
+
+	RS232::getTrameDb(latitude, longitude, horodatage, name, idBoat);
 }
 
 // Cette fonction permet d'ajouter une trame en base de donnée
@@ -126,6 +135,6 @@ void RS232::addTrameDb(QString latitude, QString longitude, QString horodatage, 
 void RS232::delTrameDb(QString id)
 {
 	QString requete;
-	requete = "DELETE FROM gps WHERE id='id' ";
+	requete = "DELETE FROM gps WHERE id = '" + id + "' ";
 	retour = bddMySQL->executer(requete);
 }
