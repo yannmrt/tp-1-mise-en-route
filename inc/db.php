@@ -13,10 +13,10 @@ session_start();
 */
 
 $_DB = array(
-    "hostname" => "localhost",
-    "username" => "root",
-    "password" => "",
-    "dbname" => "tp1" 
+    "hostname" => "192.168.64.201",
+    "username" => "superuser",
+    "password" => "superuser",
+    "dbname" => "TP1" 
 );
 
 
