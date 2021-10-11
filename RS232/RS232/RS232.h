@@ -1,38 +1,40 @@
+#include "ui_RS232.h"
 #include <QtWidgets/QMainWindow>
+
+#include <qDebug>
+
+// On inclus les dépendances nécessaires au port série
+#include <QSerialPort>
+#include <QSerialPortInfo>
+
+// On inclus les dépendances pour SQL
 #include <QtSql/QtSql>
 #include <QSqlQuery>
-#include <QApplication>
-#include <QDateTime>
-
-#include "ui_RS232.h"
-#include "database.h"
-
-#include <QSerialPort>
-#include <QThread>
+#include <QtSql>
 
 class RS232 : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    RS232(QWidget *parent = Q_NULLPTR);	
-	char requete;
-	char retour;
-	char donnees;
+    RS232(QWidget *parent = Q_NULLPTR);
+	QString retour;
 
 private:
     Ui::RS232Class ui;
-	BaseDeDonnees *bddMySQL;
+	
+	// On instancie le pointeur pour le port série
 	QSerialPort *port;
 
-public slots:
-	// PORT SERIE
-	void issue(const QString &trame);
-	void receive();
-	void decodeTrame(const QString &trame);
+	// On instancie les pointeurs pour la base de données
+	QSqlDatabase *db;
+	QSqlQuery *query;
 
-	// BASE DE DONNEE
-	void getTrameDb();
-	void addTrameDb(QString latitude, QString longitude, QString horodatage, QString name, QString idBoat);
-	void delTrameDb(QString id);
+	// on instancie la variable trame utilisée dans la classe reception
+	QString trame;
+
+public slots:
+	void serialPortRead();
+	void decodeTrame(const QString trame);
+	void addTrameDb(const QString latitude, const QString longitude, const QString horodatage);
 };
