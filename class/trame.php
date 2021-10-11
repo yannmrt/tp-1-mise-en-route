@@ -45,8 +45,8 @@ class Trame {
             $name_exist_count = $req_name_exist->rowCount();
 
             if($name_exist_count == 0) {
-                if(filter_var($this->_longitude, FILTER_VALIDATE_INT)) {
-                    if(filter_var($this->_latitude, FILTER_VALIDATE_INT)) {
+                if(filter_var($this->_longitude, FILTER_VALIDATE_FLOAT)) {
+                    if(filter_var($this->_latitude, FILTER_VALIDATE_FLOAT)) {
                         $add_trame =  $this->_db->prepare("INSERT INTO gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat");
                         $add_trame->execute(array(
                             "longitude" => $this->_longitude,
@@ -108,8 +108,8 @@ class Trame {
         $this->_idBoat = htmlspecialchars($idBoat);
 
         if(!empty($this->_id) AND !empty($this->_longitude) AND !empty($this->_latitude) AND !empty($this->_name)) {
-            if(filter_var($this->_longitude, FILTER_VALIDATE_INT)) {
-                if(filter_var($this->_latitude, FILTER_VALIDATE_INT)) {
+            if(filter_var($this->_longitude, FILTER_VALIDATE_FLOAT)) {
+                if(filter_var($this->_latitude, FILTER_VALIDATE_FLOAT)) {
                     $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat WHERE id = :id");
                     $editTrame->execute(array(
                         "longitude" => $this->_longitude,

@@ -59,13 +59,13 @@ if(isset($_POST["name"])) {
                     <div class="form-group">
                         <label for="number">Longitude</label>
                         <div class="col-sm-4">
-                            <input type="number" class="form-control" id="longitude" name="longitude" placeholder="Longitude">
+                            <input type="text" class="form-control" id="longitude" name="longitude" placeholder="Longitude">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="number">Latitude</label>
                         <div class="col-sm-4">
-                            <input type="number" class="form-control" id="latitude" name="latitude" placeholder="Latitude">
+                            <input type="text" class="form-control" id="latitude" name="latitude" placeholder="Latitude">
                         </div>
                     </div>
                     <div class="form-group col-md-4">
