@@ -17,6 +17,7 @@ class Trame {
     private $_id;
     private $_name;
     private $_tab;
+    private $_horodatage;
     private $_db;
 
     // Constructeur de la classe User avec la base de donnée ($_PDO est dans /inc/db.php)
@@ -38,6 +39,8 @@ class Trame {
         $this->_latitude = htmlspecialchars($latitude);
         $this->_name = htmlspecialchars($name);
         $this->_idBoat = htmlspecialchars($idBoat);
+        $this->_horodatage = date("h:i:s");
+
 
         if(!empty($this->_longitude) AND !empty($this->_latitude) AND !empty($this->_name)) {
             $req_name_exist = $this->_db->prepare("SELECT name FROM gps WHERE name = ?");
@@ -47,12 +50,13 @@ class Trame {
             if($name_exist_count == 0) {
                 if(filter_var($this->_longitude, FILTER_VALIDATE_FLOAT)) {
                     if(filter_var($this->_latitude, FILTER_VALIDATE_FLOAT)) {
-                        $add_trame =  $this->_db->prepare("INSERT INTO gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat");
+                        $add_trame =  $this->_db->prepare("INSERT INTO gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat, horodatage = :horodatage");
                         $add_trame->execute(array(
                             "longitude" => $this->_longitude,
                             "latitude" => $this->_latitude,
                             "name" => $this->_name,
-                            "idBoat" => $this->_idBoat
+                            "idBoat" => $this->_idBoat,
+                            "horodatage" => $this->_horodatage
                         ));
                         $error = '<div class="alert alert-success" role="alert">La trame a bien été ajouté à la base de donnée</div>';
                         return $error;
