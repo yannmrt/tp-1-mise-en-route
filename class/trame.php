@@ -110,17 +110,19 @@ class Trame {
         $this->_latitude = htmlspecialchars($latitude);
         $this->_name = htmlspecialchars($name);
         $this->_idBoat = htmlspecialchars($idBoat);
+        $this->_horodatage = date("h:i:s");
 
         if(!empty($this->_id) AND !empty($this->_longitude) AND !empty($this->_latitude) AND !empty($this->_name)) {
             if(filter_var($this->_longitude, FILTER_VALIDATE_FLOAT)) {
                 if(filter_var($this->_latitude, FILTER_VALIDATE_FLOAT)) {
-                    $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat WHERE id = :id");
+                    $editTrame = $this->_db->prepare("UPDATE gps SET longitude = :longitude, latitude = :latitude, name = :name, idBoat = :idBoat, horodatage = :horodatage WHERE id = :id");
                     $editTrame->execute(array(
                         "longitude" => $this->_longitude,
                         "latitude" => $this->_latitude,
                         "name" => $this->_name,
                         "idBoat" => $this->_idBoat,
-                        "id" => $this->_id
+                        "id" => $this->_id,
+                        "horodatage" => $this->_horodatage
                     ));
 
                     $error = '<div class="alert alert-success" role="alert">La trame a bien été editée</div>';
