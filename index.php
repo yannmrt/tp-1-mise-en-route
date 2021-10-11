@@ -121,12 +121,10 @@ if (empty($_SESSION["username"])) {
             $data = $trame->getalltrame();
             $nb = $data[1];
             $case = "2";
-            for ($i = 0; $i < $nb; $i++){
+            for ($i = 0; $i < $nb; $i++) {
             ?> "<?= $data[$case] ?>": {
-                <?php $case++; ?>
-                    "lat": <?= $data[$case] ?>,
-                <?php $case++; ?>
-                    "lon": <?= $data[$case] ?>,
+                    <?php $case++; ?> "lat": <?= $data[$case] ?>,
+                    <?php $case++; ?> "lon": <?= $data[$case] ?>,
                     <?php $case++ ?>
                 },
             <?php  } ?>
@@ -169,7 +167,11 @@ if (empty($_SESSION["username"])) {
         };
     </script>
     </div>
-
+    
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
 
 </body>
 
