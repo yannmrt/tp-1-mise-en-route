@@ -16,7 +16,7 @@ class Trame {
     private $_latitude;
     private $_id;
     private $_name;
-
+    private $_tab;
     private $_db;
 
     // Constructeur de la classe User avec la base de donnée ($_PDO est dans /inc/db.php)
@@ -193,6 +193,28 @@ class Trame {
 
             }
         }
+    }
+
+    /**
+     * 
+     * On récupère la liste des bateaux sous forme de menu déroulant (page: addTram.php)
+     * 
+     */
+    public function getalltrame(){
+
+        $prepar = $this->_db->query("SELECT `latitude`, `longitude`, `name` FROM `gps` WHERE 1");
+        $nb = $prepar->RowCount();
+        $case = "1";
+        $this->_tab[$case] = $nb;
+        while($data = $prepar->fetch()){
+            $case++;
+            $this->_tab[$case] = $data['name'];
+            $case++;
+            $this->_tab[$case] = $data['latitude'];
+            $case++;
+            $this->_tab[$case] = $data['longitude'];
+        }
+        return $this->_tab;
     }
 
 }
