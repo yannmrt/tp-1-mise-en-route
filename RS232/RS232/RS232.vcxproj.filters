@@ -37,15 +37,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="database.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="RS232.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <QtMoc Include="database.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

@@ -88,12 +88,8 @@
     <QtRcc Include="RS232.qrc" />
     <QtUic Include="RS232.ui" />
     <QtMoc Include="RS232.h" />
-    <ClCompile Include="database.cpp" />
     <ClCompile Include="RS232.cpp" />
     <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <QtMoc Include="database.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

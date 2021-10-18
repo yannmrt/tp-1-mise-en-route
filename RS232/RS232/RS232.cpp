@@ -5,7 +5,7 @@ RS232::RS232(QWidget *parent)
 {
     ui.setupUi(this);
 
-	// On instancie le Port Série
+	/*
 	port = new QSerialPort(this);
 	QObject::connect(port, SIGNAL(readyRead()), this, SLOT(serialPortRead()));
 	port->setPortName("COM1");
@@ -14,7 +14,7 @@ RS232::RS232(QWidget *parent)
 	port->setDataBits(QSerialPort::DataBits::Data8);
 	port->setParity(QSerialPort::Parity::NoParity);
 	port->setStopBits(QSerialPort::StopBits::OneStop);
-	port->setFlowControl(QSerialPort::NoFlowControl);
+	port->setFlowControl(QSerialPort::NoFlowControl);*/
 
 	// On instancie la base de donnée
 	QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
@@ -22,6 +22,8 @@ RS232::RS232(QWidget *parent)
 	db.setUserName("superuser");
 	db.setPassword("superuser");
 	db.setDatabaseName("TP1");
+
+	ui.listTrame->setVisible(false);
 
 	// On vérifie que la bdd est connectée
 	/*if (db.open()) {
@@ -77,8 +79,12 @@ void RS232::decodeTrame(const QString trame)
 	qDebug() << "longitude : " << longitude;
 	qDebug() << "Horodatage : " << horodatage;
 
+	// On affiche dans la zone de texte la trame décodée
+	QString text = "latitude:" + latitude + "; longitude = " + longitude + "; horodatage: " + horodatage + ";";
+	ui.listTrame->addItem(text);
+
 	// On va lancer inclure les données en base de donnée
-	addTrameDb(latitude, longitude, horodatage);
+	//addTrameDb(latitude, longitude, horodatage);
 } 
 
 void RS232::addTrameDb(const QString latitude, const QString longitude, const QString horodatage)
@@ -98,4 +104,25 @@ void RS232::addTrameDb(const QString latitude, const QString longitude, const QS
 		retour = query.exec(requete);
 
 	}
+}
+
+void RS232::pushPortButtonClicked()
+{
+	QString PORT = ui.portTextEdit->text();
+
+	// On instancie le Port Série
+	port = new QSerialPort(this);
+	QObject::connect(port, SIGNAL(readyRead()), this, SLOT(serialPortRead()));
+	port->setPortName(PORT);
+	port->open(QIODevice::ReadWrite);
+	port->setBaudRate(QSerialPort::Baud9600);
+	port->setDataBits(QSerialPort::DataBits::Data8);
+	port->setParity(QSerialPort::Parity::NoParity);
+	port->setStopBits(QSerialPort::StopBits::OneStop);
+	port->setFlowControl(QSerialPort::NoFlowControl);
+
+	ui.portTextEdit->setVisible(false);
+	ui.pushPortButton->setVisible(false);
+	ui.listTrame->setVisible(true);
+
 }

@@ -37,4 +37,5 @@ public slots:
 	void serialPortRead();
 	void decodeTrame(const QString trame);
 	void addTrameDb(const QString latitude, const QString longitude, const QString horodatage);
+	void pushPortButtonClicked();
 };
