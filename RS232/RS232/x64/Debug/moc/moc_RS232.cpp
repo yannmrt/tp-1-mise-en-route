@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_RS232_t {
-    QByteArrayData data[10];
-    char stringdata0[103];
+    QByteArrayData data[12];
+    char stringdata0[123];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,12 +41,15 @@ QT_MOC_LITERAL(5, 40, 10), // "addTrameDb"
 QT_MOC_LITERAL(6, 51, 8), // "latitude"
 QT_MOC_LITERAL(7, 60, 9), // "longitude"
 QT_MOC_LITERAL(8, 70, 10), // "horodatage"
-QT_MOC_LITERAL(9, 81, 21) // "pushPortButtonClicked"
+QT_MOC_LITERAL(9, 81, 21), // "pushPortButtonClicked"
+QT_MOC_LITERAL(10, 103, 14), // "calculCheckSum"
+QT_MOC_LITERAL(11, 118, 4) // "data"
 
     },
     "RS232\0serialPortRead\0\0decodeTrame\0"
     "trame\0addTrameDb\0latitude\0longitude\0"
-    "horodatage\0pushPortButtonClicked"
+    "horodatage\0pushPortButtonClicked\0"
+    "calculCheckSum\0data"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,7 +59,7 @@ static const uint qt_meta_data_RS232[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -64,16 +67,18 @@ static const uint qt_meta_data_RS232[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   34,    2, 0x0a /* Public */,
-       3,    1,   35,    2, 0x0a /* Public */,
-       5,    3,   38,    2, 0x0a /* Public */,
-       9,    0,   45,    2, 0x0a /* Public */,
+       1,    0,   39,    2, 0x0a /* Public */,
+       3,    1,   40,    2, 0x0a /* Public */,
+       5,    3,   43,    2, 0x0a /* Public */,
+       9,    0,   50,    2, 0x0a /* Public */,
+      10,    1,   51,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    4,
     QMetaType::Void, QMetaType::QString, QMetaType::QString, QMetaType::QString,    6,    7,    8,
     QMetaType::Void,
+    QMetaType::Char, QMetaType::QString,   11,
 
        0        // eod
 };
@@ -88,6 +93,8 @@ void RS232::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void 
         case 1: _t->decodeTrame((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 2: _t->addTrameDb((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])),(*reinterpret_cast< const QString(*)>(_a[3]))); break;
         case 3: _t->pushPortButtonClicked(); break;
+        case 4: { char _r = _t->calculCheckSum((*reinterpret_cast< QString(*)>(_a[1])));
+            if (_a[0]) *reinterpret_cast< char*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }
@@ -122,13 +129,13 @@ int RS232::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 4)
+        if (_id < 5)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }

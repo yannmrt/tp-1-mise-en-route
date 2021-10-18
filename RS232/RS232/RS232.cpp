@@ -24,8 +24,23 @@ void RS232::serialPortRead()
 	// On va vérifier que la trame n'est pas vide
 	if (trame.size() > 0) {
 
-		// On lance la fonction decodeTrame(const QString trame) qui nous decode la trame
-		decodeTrame(trame);
+
+		QString checksum;
+		const QString typeTrame = "GPGGA";
+		const QString debutChecksum = "*";
+
+		if (trame.startsWith(typeTrame)) {
+			if (trame.contains(debutChecksum)) {
+
+				QThread::usleep(100000);
+
+				ui.listWidget->addItem(trame);
+
+				// On lance la fonction decodeTrame(const QString trame) qui nous decode la trame
+				decodeTrame(trame);
+
+			}
+		}
 	}
 }
 
@@ -80,8 +95,8 @@ void RS232::addTrameDb(const QString latitude, const QString longitude, const QS
 		QString name = "nametest";
 		QString idBoat = "1";
 
-		QString requete = "INSERT INTO gps (latitude, longitude, horodatage, name, idBoat) VALUES ('" + latitude + "', '" + longitude + "', '" + horodatage + "', '" + name + "', '" + idBoat + "')";
-		retour = query.exec(requete);
+		//QString requete = "INSERT INTO gps (latitude, longitude, horodatage, name, idBoat) VALUES ('" + latitude + "', '" + longitude + "', '" + horodatage + "', '" + name + "', '" + idBoat + "')";
+		//retour = query.exec(requete);
 
 	}
 }

@@ -1,4 +1,4 @@
-﻿  uic RS232.ui
+﻿  moc RS232.h
   RS232.cpp
   main.cpp
   moc_RS232.cpp

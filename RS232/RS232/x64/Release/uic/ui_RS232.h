@@ -13,6 +13,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -29,6 +30,7 @@ public:
     QPushButton *pushPortButton;
     QLineEdit *portTextEdit;
     QLabel *label;
+    QListWidget *listWidget;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -48,10 +50,13 @@ public:
         portTextEdit->setGeometry(QRect(10, 10, 131, 20));
         label = new QLabel(centralWidget);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(170, 10, 381, 41));
+        label->setGeometry(QRect(10, 80, 581, 71));
         QFont font;
         font.setPointSize(13);
         label->setFont(font);
+        listWidget = new QListWidget(centralWidget);
+        listWidget->setObjectName(QString::fromUtf8("listWidget"));
+        listWidget->setGeometry(QRect(10, 150, 581, 191));
         RS232Class->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(RS232Class);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
