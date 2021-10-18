@@ -5,32 +5,12 @@ RS232::RS232(QWidget *parent)
 {
     ui.setupUi(this);
 
-	/*
-	port = new QSerialPort(this);
-	QObject::connect(port, SIGNAL(readyRead()), this, SLOT(serialPortRead()));
-	port->setPortName("COM1");
-	port->open(QIODevice::ReadWrite);
-	port->setBaudRate(QSerialPort::Baud9600);
-	port->setDataBits(QSerialPort::DataBits::Data8);
-	port->setParity(QSerialPort::Parity::NoParity);
-	port->setStopBits(QSerialPort::StopBits::OneStop);
-	port->setFlowControl(QSerialPort::NoFlowControl);*/
-
 	// On instancie la base de donnée
 	QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
 	db.setHostName("192.168.64.201");
 	db.setUserName("superuser");
 	db.setPassword("superuser");
 	db.setDatabaseName("TP1");
-
-	ui.listTrame->setVisible(false);
-
-	// On vérifie que la bdd est connectée
-	/*if (db.open()) {
-		qDebug() << "bdd ok";
-	} else {
-		qDebug() << "bdd no";
-	}*/
 }
 
 void RS232::serialPortRead()
@@ -81,10 +61,10 @@ void RS232::decodeTrame(const QString trame)
 
 	// On affiche dans la zone de texte la trame décodée
 	QString text = "latitude:" + latitude + "; longitude = " + longitude + "; horodatage: " + horodatage + ";";
-	ui.listTrame->addItem(text);
+	ui.label->setText(text);
 
 	// On va lancer inclure les données en base de donnée
-	//addTrameDb(latitude, longitude, horodatage);
+	addTrameDb(latitude, longitude, horodatage);
 } 
 
 void RS232::addTrameDb(const QString latitude, const QString longitude, const QString horodatage)
@@ -120,9 +100,5 @@ void RS232::pushPortButtonClicked()
 	port->setParity(QSerialPort::Parity::NoParity);
 	port->setStopBits(QSerialPort::StopBits::OneStop);
 	port->setFlowControl(QSerialPort::NoFlowControl);
-
-	ui.portTextEdit->setVisible(false);
-	ui.pushPortButton->setVisible(false);
-	ui.listTrame->setVisible(true);
 
 }

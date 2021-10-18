@@ -37,14 +37,22 @@
      </rect>
     </property>
    </widget>
-   <widget class="QListWidget" name="listTrame">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>5</x>
-      <y>10</y>
+      <x>10</x>
+      <y>80</y>
       <width>581</width>
-      <height>331</height>
+      <height>71</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>

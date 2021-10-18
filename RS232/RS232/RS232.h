@@ -12,6 +12,11 @@
 #include <QSqlQuery>
 #include <QtSql>
 
+#include <QThread>
+
+
+
+
 class RS232 : public QMainWindow
 {
     Q_OBJECT

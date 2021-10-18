@@ -11,8 +11,8 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
@@ -28,7 +28,7 @@ public:
     QWidget *centralWidget;
     QPushButton *pushPortButton;
     QLineEdit *portTextEdit;
-    QListWidget *listTrame;
+    QLabel *label;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -46,9 +46,12 @@ public:
         portTextEdit = new QLineEdit(centralWidget);
         portTextEdit->setObjectName(QString::fromUtf8("portTextEdit"));
         portTextEdit->setGeometry(QRect(10, 10, 131, 20));
-        listTrame = new QListWidget(centralWidget);
-        listTrame->setObjectName(QString::fromUtf8("listTrame"));
-        listTrame->setGeometry(QRect(5, 10, 581, 331));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QString::fromUtf8("label"));
+        label->setGeometry(QRect(170, 10, 381, 41));
+        QFont font;
+        font.setPointSize(13);
+        label->setFont(font);
         RS232Class->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(RS232Class);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
@@ -71,6 +74,7 @@ public:
     {
         RS232Class->setWindowTitle(QCoreApplication::translate("RS232Class", "RS232", nullptr));
         pushPortButton->setText(QCoreApplication::translate("RS232Class", "Configurer le port", nullptr));
+        label->setText(QString());
     } // retranslateUi
 
 };
