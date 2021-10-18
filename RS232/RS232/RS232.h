@@ -1,6 +1,8 @@
 #include "ui_RS232.h"
 #include <QtWidgets/QMainWindow>
 
+#include <QRegExp>
+
 #include <qDebug>
 
 // On inclus les dépendances nécessaires au port série

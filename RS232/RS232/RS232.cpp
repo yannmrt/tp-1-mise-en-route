@@ -95,8 +95,8 @@ void RS232::addTrameDb(const QString latitude, const QString longitude, const QS
 		QString name = "nametest";
 		QString idBoat = "1";
 
-		//QString requete = "INSERT INTO gps (latitude, longitude, horodatage, name, idBoat) VALUES ('" + latitude + "', '" + longitude + "', '" + horodatage + "', '" + name + "', '" + idBoat + "')";
-		//retour = query.exec(requete);
+		QString requete = "INSERT INTO gps (latitude, longitude, horodatage, name, idBoat) VALUES ('" + latitude + "', '" + longitude + "', '" + horodatage + "', '" + name + "', '" + idBoat + "')";
+		retour = query.exec(requete);
 
 	}
 }
