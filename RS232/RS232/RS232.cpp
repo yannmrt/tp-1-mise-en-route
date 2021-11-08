@@ -39,6 +39,9 @@ void RS232::serialPortRead()
 				// On lance la fonction decodeTrame(const QString trame) qui nous decode la trame
 				decodeTrame(trame);
 
+				QThread::usleep(100000);
+
+
 			}
 		}
 	}
@@ -99,6 +102,7 @@ void RS232::addTrameDb(const QString latitude, const QString longitude, const QS
 		retour = query.exec(requete);
 
 	}
+	trame = "";
 }
 
 void RS232::pushPortButtonClicked()
